@@ -317,6 +317,7 @@ export async function loadCliConfig(
       name: e.config.name,
       version: e.config.version,
     })),
+    showMcpToolResponse: settings.showMcpToolResponse,
   });
 }
 

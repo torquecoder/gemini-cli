@@ -189,6 +189,14 @@ In addition to a project settings file, a project's `.gemini` directory can cont
     "hideTips": true
     ```
 
+- **`showMcpToolResponse`** (boolean):
+  - **Description:** Controls whether the response from an MCP tool is displayed in the CLI after execution. If set to `false`, a message indicating the response is hidden will be shown instead of the actual tool output. The response is still sent to the language model.
+  - **Default:** `true`
+  - **Example:**
+    ```json
+    "showMcpToolResponse": false
+    ```
+
 ### Example `settings.json`:
 
 ```json

@@ -141,6 +141,7 @@ export interface ConfigParameters {
   extensionContextFilePaths?: string[];
   listExtensions?: boolean;
   activeExtensions?: ActiveExtension[];
+  showMcpToolResponse?: boolean;
 }
 
 export class Config {
@@ -182,6 +183,7 @@ export class Config {
   private modelSwitchedDuringSession: boolean = false;
   private readonly listExtensions: boolean;
   private readonly _activeExtensions: ActiveExtension[];
+  readonly showMcpToolResponse: boolean;
   flashFallbackHandler?: FlashFallbackHandler;
   private quotaErrorOccurred: boolean = false;
 
@@ -227,6 +229,7 @@ export class Config {
     this.extensionContextFilePaths = params.extensionContextFilePaths ?? [];
     this.listExtensions = params.listExtensions ?? false;
     this._activeExtensions = params.activeExtensions ?? [];
+    this.showMcpToolResponse = params.showMcpToolResponse ?? true; // Default to true
 
     if (params.contextFileName) {
       setGeminiMdFilename(params.contextFileName);

@@ -124,6 +124,7 @@ export async function discoverMcpTools(
   mcpServers: Record<string, MCPServerConfig>,
   mcpServerCommand: string | undefined,
   toolRegistry: ToolRegistry,
+  config: Config,
 ): Promise<void> {
   // Set discovery state to in progress
   mcpDiscoveryState = MCPDiscoveryState.IN_PROGRESS;
@@ -144,7 +145,7 @@ export async function discoverMcpTools(
 
     const discoveryPromises = Object.entries(mcpServers).map(
       ([mcpServerName, mcpServerConfig]) =>
-        connectAndDiscover(mcpServerName, mcpServerConfig, toolRegistry),
+        connectAndDiscover(mcpServerName, mcpServerConfig, toolRegistry, config),
     );
     await Promise.all(discoveryPromises);
 
@@ -171,6 +172,7 @@ async function connectAndDiscover(
   mcpServerName: string,
   mcpServerConfig: MCPServerConfig,
   toolRegistry: ToolRegistry,
+  config: Config,
 ): Promise<void> {
   // Initialize the server status as connecting
   updateMCPServerStatus(mcpServerName, MCPServerStatus.CONNECTING);
@@ -351,6 +353,7 @@ async function connectAndDiscover(
           funcDecl.name,
           mcpServerConfig.timeout ?? MCP_DEFAULT_TIMEOUT_MSEC,
           mcpServerConfig.trust,
+          config,
         ),
       );
     }
