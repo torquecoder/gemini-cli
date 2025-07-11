@@ -53,6 +53,7 @@ interface CliArgs {
   allowedMcpServerNames: string[] | undefined;
   extensions: string[] | undefined;
   listExtensions: boolean | undefined;
+  hideMcpToolResponses: boolean | undefined;
 }
 
 async function parseArguments(): Promise<CliArgs> {
@@ -167,6 +168,11 @@ async function parseArguments(): Promise<CliArgs> {
       alias: 'l',
       type: 'boolean',
       description: 'List all available extensions and exit.',
+    })
+    .option('hide-mcp-tool-responses', {
+      type: 'boolean',
+      description: 'Hide MCP tool responses in the UI.',
+      default: false,
     })
 
     .version(await getCliVersion()) // This will enable the --version flag based on package.json
@@ -319,6 +325,8 @@ export async function loadCliConfig(
       version: e.config.version,
     })),
     noBrowser: !!process.env.NO_BROWSER,
+    hideMcpToolResponses:
+      argv.hideMcpToolResponses ?? settings.hideMcpToolResponses ?? false,
   });
 }
 

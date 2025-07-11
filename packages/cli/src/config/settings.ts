@@ -79,6 +79,8 @@ export interface Settings {
   // UI setting. Does not display the ANSI-controlled terminal title.
   hideWindowTitle?: boolean;
   hideTips?: boolean;
+  // Whether to hide MCP tool responses in the UI.
+  hideMcpToolResponses?: boolean;
 
   // Setting for setting maximum number of user/model/tool turns in a session.
   maxSessionTurns?: number;

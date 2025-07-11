@@ -197,6 +197,14 @@ In addition to a project settings file, a project's `.gemini` directory can cont
     "maxSessionTurns": 10
     ```
 
+- **`hideMcpToolResponses`** (boolean):
+  - **Description:** Controls whether MCP tool responses are hidden in the UI.
+  - **Default:** `false` (meaning responses are shown by default)
+  - **Example:**
+    ```json
+    "hideMcpToolResponses": true
+    ```
+
 ### Example `settings.json`:
 
 ```json

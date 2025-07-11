@@ -89,6 +89,34 @@ describe('loadCliConfig', () => {
     const config = await loadCliConfig(settings, [], 'test-session');
     expect(config.getShowMemoryUsage()).toBe(true);
   });
+
+  it('should set hideMcpToolResponses to false by default when no flag or setting is present', async () => {
+    process.argv = ['node', 'script.js'];
+    const settings: Settings = {};
+    const config = await loadCliConfig(settings, [], 'test-session');
+    expect(config.getHideMcpToolResponses()).toBe(false);
+  });
+
+  it('should set hideMcpToolResponses to true when --hide-mcp-tool-responses flag is present', async () => {
+    process.argv = ['node', 'script.js', '--hide-mcp-tool-responses'];
+    const settings: Settings = {};
+    const config = await loadCliConfig(settings, [], 'test-session');
+    expect(config.getHideMcpToolResponses()).toBe(true);
+  });
+
+  it('should use hideMcpToolResponses value from settings if CLI flag is not present (settings true)', async () => {
+    process.argv = ['node', 'script.js'];
+    const settings: Settings = { hideMcpToolResponses: true };
+    const config = await loadCliConfig(settings, [], 'test-session');
+    expect(config.getHideMcpToolResponses()).toBe(true);
+  });
+
+  it('should prioritize CLI flag (true) over settings (false) for hideMcpToolResponses', async () => {
+    process.argv = ['node', 'script.js', '--hide-mcp-tool-responses'];
+    const settings: Settings = { hideMcpToolResponses: false };
+    const config = await loadCliConfig(settings, [], 'test-session');
+    expect(config.getHideMcpToolResponses()).toBe(true);
+  });
 });
 
 describe('loadCliConfig telemetry', () => {
